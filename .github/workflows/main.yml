@@ -5,11 +5,13 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: environment
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
