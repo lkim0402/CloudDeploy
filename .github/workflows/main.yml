@@ -32,5 +32,5 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3
-        run: node src/deploy.js
+        run: node deploy.js
         working-directory: ./

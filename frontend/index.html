@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload ZIP File</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        background: #f0f0f0;
+        justify-content: center;
+      }
+
+      .container {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="file"] {
+        margin-top: 1rem;
+      }
+      #fileName {
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+
+      #linkDiv {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Select a ZIP File</h2>
+      <p>Upload your static ZIP file to host on a S3 bucket</p>
+      <input type="file" id="zipfile" accept=".zip" />
+      <div id="fileName"></div>
+      <button id="uploadBtn">Upload</button>
+      <div id="linkDiv">
+        <a id="link" href="" target="_blank"></a>
+      </div>
+    </div>
+
+    <script>
+      const zipfile = document.getElementById("zipfile");
+      const fileName = document.getElementById("filename");
+      const uploadBtn = document.getElementById("uploadBtn");
+      const link = document.getElementById("link");
+
+      zipfile.addEventListener("change", () => {
+        const file = zipfile.files[0];
+        if (file) {
+          fileName.textContent = `Selected file: ${file.name}`;
+        } else {
+          fileName.textContent = "none";
+        }
+      });
+
+      uploadBtn.addEventListener("click", async () => {
+        const file = zipfile.files[0];
+        if (!file) {
+          return alert("Please select a file first");
+        }
+
+        const formData = new FormData();
+        formData.append("zipfile", file);
+
+        const res = await fetch("/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const text = await res.text();
+        // alert(text);
+        console.log(text);
+        link.href = text;
+        link.textContent = text;
+      });
+    </script>
+  </body>
+</html>
