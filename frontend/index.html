@@ -53,7 +53,7 @@
 
     <script>
       const zipfile = document.getElementById("zipfile");
-      const fileName = document.getElementById("filename");
+      const fileName = document.getElementById("fileName");
       const uploadBtn = document.getElementById("uploadBtn");
       const link = document.getElementById("link");
 
@@ -80,11 +80,9 @@
           body: formData,
         });
 
-        const { filenum, link } = await res.text();
-        // alert(text);
-        console.log(filenum);
-        link.href = text;
-        link.textContent = text;
+        const { filenum, linkS3 } = await res.json();
+        link.href = linkS3;
+        link.textContent = linkS3;
       });
     </script>
   </body>

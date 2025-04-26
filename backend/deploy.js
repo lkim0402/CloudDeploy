@@ -1,11 +1,11 @@
 import {
-  S3Client,
   PutObjectCommand,
+  S3,
+  S3Client,
   S3ServiceException,
 } from "@aws-sdk/client-s3";
 import fs from "fs";
 import path from "path";
-import process from "process";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -23,19 +23,20 @@ const mimeTypes = {
 
 const BUCKET_NAME = "cloud-deploy-bucket-01";
 
-const client = new S3Client({
-  region: "us-east-1",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-});
+// const client = new S3Client({
+//   region: "us-east-1",
+//   credentials: {
+//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   },
+// });
+const client = new S3();
 
 export const uploadAndGetS3Link = async (dirPath) => {
   try {
     const fileNum = await uploadDir(dirPath);
-    const s3Link = generateS3Link();
-    return { filenum: fileNum, link: s3Link };
+    const linkS3 = generateS3Link();
+    return { filenum: fileNum, linkS3: linkS3 };
   } catch (e) {
     console.error("Error uploading directory: ", e);
     throw e;

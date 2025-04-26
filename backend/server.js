@@ -41,8 +41,8 @@ app.post("/upload", upload.single("zipfile"), async (req, res) => {
         const contentPath = stats.isDirectory() ? firstItemPath : extractPath;
 
         // Now pass the real content folder to uploadAndGetS3Link
-        const link = await uploadAndGetS3Link(contentPath);
-        res.send(link);
+        const { fileNum, linkS3 } = await uploadAndGetS3Link(contentPath);
+        res.send({ fileNum: fileNum, linkS3: linkS3 });
       });
   } catch (err) {
     console.error(err);

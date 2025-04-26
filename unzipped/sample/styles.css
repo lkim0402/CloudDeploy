@@ -1,0 +1,14 @@
+body {
+  font-family: sans-serif; /* A clean and readable default font */
+  line-height: 1.6; /* Improves readability by adding space between lines */
+  margin: 20px; /* Adds some spacing around the content */
+  background-color: #f4f4f4; /* A light gray background for better contrast */
+  color: #333; /* A dark gray color for the text */
+}
+
+div {
+  background-color: #fff; /* White background for the container */
+  padding: 20px; /* Adds padding inside the container */
+  border-radius: 8px; /* Slightly rounded corners for a softer look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
