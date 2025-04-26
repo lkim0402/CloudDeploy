@@ -33,6 +33,9 @@
       #linkDiv {
         margin-top: 1rem;
       }
+      #num {
+        margin-top: 1rem;
+      }
     </style>
   </head>
   <body>
@@ -45,6 +48,7 @@
       <div id="linkDiv">
         <a id="link" href="" target="_blank"></a>
       </div>
+      <div id="num"></div>
     </div>
 
     <script>
@@ -76,9 +80,9 @@
           body: formData,
         });
 
-        const text = await res.text();
+        const { filenum, link } = await res.text();
         // alert(text);
-        console.log(text);
+        console.log(filenum);
         link.href = text;
         link.textContent = text;
       });
